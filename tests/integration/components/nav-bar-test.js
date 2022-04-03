@@ -6,21 +6,11 @@ import { hbs } from 'ember-cli-htmlbars';
 module('Integration | Component | nav-bar', function (hooks) {
   setupRenderingTest(hooks);
 
-  test('it renders', async function (assert) {
-    // Set any properties with this.set('myProperty', 'value');
-    // Handle any actions with this.set('myAction', function(val) { ... });
-
+  test('it renders with Header and Links', async function (assert) {
     await render(hbs`<NavBar />`);
 
-    assert.dom(this.element).hasText('');
-
-    // Template block usage:
-    await render(hbs`
-      <NavBar>
-        template block text
-      </NavBar>
-    `);
-
-    assert.dom(this.element).hasText('template block text');
+    assert.dom('.menu .menu-index').hasText('SuperRentals');
+    assert.dom('.menu .links .menu-about').hasText('About');
+    assert.dom('.menu .links .menu-contact').hasText('Contact');
   });
 });
