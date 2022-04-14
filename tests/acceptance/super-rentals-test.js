@@ -1,4 +1,4 @@
-import { module, test } from 'qunit';
+import { assert, module, test } from 'qunit';
 import { click, visit, currentURL } from '@ember/test-helpers';
 import { setupApplicationTest } from 'ember-qunit';
 
@@ -72,5 +72,23 @@ module('Acceptance | super rentals', function (hooks) {
 
     await click('nav a.menu-index');
     assert.strictEqual(currentURL(), '/');
+  });
+
+  test('viewing the details of a rental propety', async function (asert) {
+    await visit('/');
+    assert.dom('.rental').exists({ count: 3 });
+
+    await click('.rental:first-of-type a');
+    assert.strictEqual(currentURL(), '/rentals/grand-old-mansion');
+  });
+
+  test('visiting /rentals/grand-old-mansion', async function (asert) {
+    await visit('/rentals/grand-old-mansion');
+
+    assert.strictEqual(currentURL(), '/rentals/grand-old-mansion');
+    assert.dom('nav').exists();
+    assert.dom('h1').containsText('SuperRentals');
+    assert.dom('h2').containsText('Grand Old Mansion');
+    assert.dom('.rental.detailed').exists();
   });
 });
